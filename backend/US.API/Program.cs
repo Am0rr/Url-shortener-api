@@ -1,6 +1,5 @@
 using DotNetEnv;
-using Microsoft.EntityFrameworkCore;
-using US.DAL.Persistence;
+using US.DAL;
 
 Env.TraversePath().Load();
 
@@ -13,8 +12,7 @@ var connectionString = $"Server={Env.GetString("DB_HOST", "localhost")},{Env.Get
                        $"Encrypt=False;" +
                        $"TrustServerCertificate=True;";
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDataAccessLayer(connectionString);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
