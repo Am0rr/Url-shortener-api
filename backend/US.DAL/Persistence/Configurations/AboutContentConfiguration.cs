@@ -13,7 +13,7 @@ public class AboutContentConfiguration : IEntityTypeConfiguration<AboutContent>
         builder.HasKey(a => a.Id);
         
         builder.Property(a => a.CreatedAt).IsRequired();
-        builder.Property(a => a.Text).IsRequired();
+        builder.Property(a => a.Text).IsRequired().HasMaxLength(5000);
 
         builder.HasOne(a => a.LastModifiedBy)
             .WithMany()
