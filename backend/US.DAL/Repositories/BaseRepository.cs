@@ -6,8 +6,7 @@ using System.Linq.Expressions;
 
 namespace US.DAL.Repositories;
 
-public class BaseRepository<T>(
-    AppDbContext context) 
+public class BaseRepository<T>(AppDbContext context) 
     : IBaseRepository<T> where T : BaseEntity
 {
     protected readonly DbSet<T> DbSet = context.Set<T>();

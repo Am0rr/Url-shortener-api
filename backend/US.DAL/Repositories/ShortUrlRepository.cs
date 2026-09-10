@@ -5,9 +5,8 @@ using US.DAL.Persistence;
 
 namespace US.DAL.Repositories;
 
-public class ShortUrlRepository(
-    AppDbContext context) : BaseRepository<ShortUrl>(context),
-    IShortUrlRepository
+public class ShortUrlRepository(AppDbContext context) 
+    : BaseRepository<ShortUrl>(context), IShortUrlRepository
 {
     public async Task<ShortUrl?> GetByOriginalUrlAsync(string originalUrl, CancellationToken cancellationToken = default)
     {
