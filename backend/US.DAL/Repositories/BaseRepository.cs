@@ -27,12 +27,12 @@ public class BaseRepository<T>(
         DbSet.Remove(item);
     }
 
-    public virtual async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public virtual async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         return await DbSet.FindAsync([id], cancellationToken);
     }
 
-    public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
+    public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await DbSet.AsNoTracking().ToListAsync(cancellationToken);
     }
