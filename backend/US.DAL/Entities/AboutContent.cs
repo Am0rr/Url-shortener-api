@@ -16,4 +16,14 @@ public class AboutContent : BaseEntity
         Text = text;
         LastModifiedByUserId = lastModifiedByUserId;
     }
+
+    public void UpdateText(string newText, int newLastModifiedByUserId)
+    {
+        if (string.IsNullOrWhiteSpace(newText))
+            throw new ArgumentException("Text cannot be empty", nameof(newText));
+        
+        Text = newText;
+        LastModifiedByUserId = newLastModifiedByUserId;
+        MarkUpdated();
+    }
 }
