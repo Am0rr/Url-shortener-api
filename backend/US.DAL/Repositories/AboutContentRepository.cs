@@ -5,11 +5,10 @@ using US.DAL.Persistence;
 
 namespace US.DAL.Repositories;
 
-public class AboutContentRepository(AppDbContext context)
-    : BaseRepository<AboutContent>(context), IAboutContentRepository
+public class AboutContentRepository(AppDbContext context) : IAboutContentRepository
 {
     public async Task<AboutContent?> GetContentAsync(CancellationToken cancellationToken = default)
     {
-        return await DbSet.FirstOrDefaultAsync(cancellationToken);
+        return await context.AboutContents.FirstOrDefaultAsync(cancellationToken);
     }
 }
