@@ -1,6 +1,7 @@
 using DotNetEnv;
 using US.API.Infrastructure.Filters;
 using US.API.Infrastructure.Identity;
+using US.API.Middleware;
 using US.BLL;
 using US.BLL.Interfaces;
 using US.DAL;
@@ -32,6 +33,8 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
