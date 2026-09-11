@@ -14,7 +14,10 @@ public class ShortUrlConfiguration : IEntityTypeConfiguration<ShortUrl>
         
         builder.Property(s => s.CreatedAt).IsRequired();
         builder.Property(s => s.OriginalUrl).IsRequired().HasMaxLength(2048);
+        builder.Property(s => s.ShortCode).IsRequired().HasMaxLength(10);
         builder.Property(s => s.ClickCount).IsRequired();
+
+        builder.HasIndex(s => s.ShortCode).IsUnique();
 
         builder.HasOne(s => s.CreatedBy)
             .WithMany()

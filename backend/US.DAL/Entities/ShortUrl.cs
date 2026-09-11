@@ -3,13 +3,14 @@ namespace US.DAL.Entities;
 public class ShortUrl : BaseEntity
 {
     public string OriginalUrl { get; private set; } = null!;
+    public string ShortCode { get; private set; } = null!;
     public int CreatedByUserId { get; private set; }
     public User? CreatedBy { get; private set; }
     public int ClickCount { get; private set; }
     
     protected ShortUrl() {}
 
-    public ShortUrl(string originalUrl, int createdByUserId)
+    public ShortUrl(string originalUrl, string shortCode, int createdByUserId)
     {
         if(string.IsNullOrWhiteSpace(originalUrl))
             throw new ArgumentException("URL cannot be empty", nameof(originalUrl));
@@ -19,6 +20,7 @@ public class ShortUrl : BaseEntity
 
         OriginalUrl = originalUrl;
         CreatedByUserId = createdByUserId;
+        ShortCode = shortCode;
         ClickCount = 0;
     }
     
