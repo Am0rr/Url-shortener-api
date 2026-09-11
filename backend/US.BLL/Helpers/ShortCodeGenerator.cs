@@ -10,7 +10,7 @@ public static class ShortCodeGenerator
     public static string Generate(int length = DefaultLength)
     {
         var buffer = new char[length];
-        for (var i = 0; i < length; length++)
+        for (var i = 0; i < length; i++)
         {
             var index = RandomNumberGenerator.GetInt32(Alphabet.Length);
             buffer[i] = Alphabet[index];

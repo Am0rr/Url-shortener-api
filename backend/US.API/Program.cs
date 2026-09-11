@@ -1,10 +1,12 @@
 using DotNetEnv;
 using US.API.Infrastructure.Filters;
 using US.API.Infrastructure.Identity;
+using US.API.Infrastructure.Seeders;
 using US.API.Middleware;
 using US.BLL;
 using US.BLL.Interfaces;
 using US.DAL;
+using US.DAL.Persistence;
 
 Env.TraversePath().Load();
 
@@ -33,6 +35,12 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await DbSeeder.SeedAsync(context);
+}
 
 app.UseMiddleware<GlobalExceptionHandler>();
 

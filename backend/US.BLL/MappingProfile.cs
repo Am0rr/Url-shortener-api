@@ -1,5 +1,6 @@
 using AutoMapper;
 using US.BLL.DTOs.AboutContents;
+using US.BLL.DTOs.Identity;
 using US.BLL.DTOs.ShortUrls;
 using US.DAL.Entities;
 
@@ -9,6 +10,8 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        CreateMap<User, AuthResponse>();
+        
         CreateMap<ShortUrl, ShortUrlResponse>()
             .ForMember(dest => dest.CreatedByEmail, opt => opt.MapFrom(src => src.CreatedBy!.Email));
 
