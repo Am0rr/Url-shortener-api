@@ -58,6 +58,15 @@ public class ShortUrlService(
         return mapper.Map<IEnumerable<ShortUrlResponse>>(urls);
     }
 
+    public async Task<ShortUrlResponse> GetByShortCodeAsync(string shortCode,
+        CancellationToken cancellationToken = default)
+    {
+        var url = await unitOfWork.ShortUrls.GetByShortCodeAsync(shortCode, cancellationToken)
+                  ?? throw new NotFoundException($"Short url with short code {shortCode} was not found.");
+
+        return mapper.Map<ShortUrlResponse>(url);
+    }
+
     private async Task<string> GenerateUniqueShortCodeAsync(CancellationToken cancellationToken)
     {
         for (var attempt = 0; attempt < MaxGenerationAttempts; attempt++)

@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +18,8 @@ public static class AuthenticationExtensions
             ?? throw new InvalidOperationException("JWT configuration is missing.");
         
         services.AddScoped<IJwtProvider, JwtProvider>();
+        
+        JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
