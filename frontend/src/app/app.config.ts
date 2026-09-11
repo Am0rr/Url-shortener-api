@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 
-export const API_BASE_URL = 'https://localhost:7000/api';
+export const API_BASE_URL = 'http://localhost:5091/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
