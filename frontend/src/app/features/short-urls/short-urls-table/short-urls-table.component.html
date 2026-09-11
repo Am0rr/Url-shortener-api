@@ -1,0 +1,63 @@
+<div class="page">
+  <h1>Short URLs</h1>
+
+  @if (isAuthenticated()) {
+    <section class="add-url">
+      <h2>Add new URL</h2>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <input type="text" formControlName="originalUrl" placeholder="https://example.com/very/long/path" />
+        <button type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Adding...' : 'Shorten' }}
+        </button>
+      </form>
+      @if (form.controls.originalUrl.invalid && form.controls.originalUrl.touched) {
+        <p class="field-error">Enter a valid URL starting with http:// or https://</p>
+      }
+      @if (formError()) {
+        <p class="form-error">{{ formError() }}</p>
+      }
+    </section>
+  }
+
+  @if (loading()) {
+    <p>Loading...</p>
+  } @else if (urls().length === 0) {
+    <p>No URLs yet.</p>
+  } @else {
+    <table>
+      <thead>
+      <tr>
+        <th>Original URL</th>
+        <th>Short code</th>
+        <th>Created by</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (url of urls(); track url.id) {
+          <tr>
+            <td class="truncate" [title]="url.originalUrl">{{ url.originalUrl }}</td>
+            <td>
+              <a [href]="'http://localhost:5091/' + url.shortCode" target="_blank" rel="noopener">
+                {{ url.shortCode }}
+              </a>
+            </td>
+            <td>{{ url.createdByEmail }}</td>
+            <td>{{ url.createdAt | date: 'short' }}</td>
+            <td class="actions">
+              @if (isAuthenticated()) {
+                <a [routerLink]="['/urls', url.id]">Details</a>
+              }
+              @if (isAuthenticated() && canDelete(url.createdByEmail)) {
+                <button type="button" [disabled]="deletingId() === url.id" (click)="remove(url.id)">
+                  Delete
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
