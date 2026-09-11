@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { API_BASE_URL } from '../../app.config';
-import { CreateShortUrlRequest, ShortUrlResponse } from '../models/short-url.model';
+import { CreateShortUrlRequest, ShortUrlResponse } from '../models/short-url.models';
 
 @Injectable({ providedIn: 'root' })
 export class ShortUrlService {
