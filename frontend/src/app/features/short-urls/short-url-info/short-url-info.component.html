@@ -1,0 +1,24 @@
+<div class="page">
+  <a routerLink="/urls">&larr; Back to list</a>
+
+  @if (loading()) {
+    <p>Loading...</p>
+  } @else if (errorMessage()) {
+    <p class="form-error">{{ errorMessage() }}</p>
+  } @else if (url(); as u) {
+    <h1>URL details</h1>
+    <dl>
+      <dt>Original URL</dt>
+      <dd><a [href]="u.originalUrl" target="_blank" rel="noopener">{{ u.originalUrl }}</a></dd>
+
+      <dt>Short code</dt>
+      <dd>{{ u.shortCode }}</dd>
+
+      <dt>Created by</dt>
+      <dd>{{ u.createdByEmail }}</dd>
+
+      <dt>Created at</dt>
+      <dd>{{ u.createdAt | date: 'medium' }}</dd>
+    </dl>
+  }
+</div>
