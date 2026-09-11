@@ -20,10 +20,6 @@ public class ShortUrlRepository(AppDbContext context)
         _dbSet.Remove(url);
     }
     
-    public async Task<ShortUrl?> GetByOriginalUrlAsync(string originalUrl, CancellationToken cancellationToken = default)
-    {
-        return await _dbSet.FirstOrDefaultAsync(s => s.OriginalUrl == originalUrl, cancellationToken);
-    }
 
     public async Task<ShortUrl?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
@@ -38,5 +34,15 @@ public class ShortUrlRepository(AppDbContext context)
             .AsNoTracking()
             .Include(s => s.CreatedBy)
             .ToListAsync(cancellationToken);
+    }
+    
+    public async Task<ShortUrl?> GetByOriginalUrlAsync(string originalUrl, CancellationToken cancellationToken = default)
+    {
+        return await _dbSet.FirstOrDefaultAsync(s => s.OriginalUrl == originalUrl, cancellationToken);
+    }
+
+    public async Task<ShortUrl?> GetByShortCodeAsync(string shortCode, CancellationToken cancellationToken = default)
+    {
+        return await _dbSet.FirstOrDefaultAsync(s => s.ShortCode == shortCode, cancellationToken);
     }
 }
