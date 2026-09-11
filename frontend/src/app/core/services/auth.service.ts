@@ -7,7 +7,7 @@ import { AuthResponse, LoginRequest } from '../models/auth.models';
 export interface CurrentUser {
   id: number;
   email: string;
-  role: 'Administrator' | 'User';
+  role: 'Admin' | 'User';
   accessToken: string;
 }
 
@@ -21,7 +21,7 @@ export class AuthService {
 
   readonly currentUser = this._currentUser.asReadonly();
   readonly isAuthenticated = computed(() => this._currentUser() !== null);
-  readonly isAdmin = computed(() => this._currentUser()?.role === 'Administrator');
+  readonly isAdmin = computed(() => this._currentUser()?.role === 'Admin');
 
   login(request: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${API_BASE_URL}/auth/login`, request).pipe(
