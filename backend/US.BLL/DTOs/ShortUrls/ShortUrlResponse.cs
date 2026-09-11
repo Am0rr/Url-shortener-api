@@ -1,9 +1,10 @@
 namespace US.BLL.DTOs.ShortUrls;
 
-public record ShortUrlResponse(
-    int Id,
-    string OriginalUrl,
-    string ShortCode,
-    string CreatedByEmail,
-    DateTimeOffset CreatedAt
-);
+public record ShortUrlResponse
+{
+    public int Id { get; init; }
+    public string OriginalUrl { get; init; } = null!;
+    public string ShortCode { get; init; } = null!;
+    public string CreatedByEmail { get; init; } = null!;
+    public DateTimeOffset CreatedAt { get; init; }
+}
