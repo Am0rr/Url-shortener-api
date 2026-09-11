@@ -1,4 +1,5 @@
 using DotNetEnv;
+using US.API.Infrastructure.Filters;
 using US.DAL;
 
 Env.TraversePath().Load();
@@ -14,7 +15,11 @@ var connectionString = $"Server={Env.GetString("DB_HOST", "localhost")},{Env.Get
 
 builder.Services.AddDataAccessLayer(connectionString);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+});
+
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
