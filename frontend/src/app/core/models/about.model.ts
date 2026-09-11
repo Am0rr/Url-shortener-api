@@ -1,5 +1,5 @@
 export interface AboutContentResponse {
-  id: string,
+  id: number,
   text: string,
   lastModifiedByEmail: string,
   updatedAt?: string

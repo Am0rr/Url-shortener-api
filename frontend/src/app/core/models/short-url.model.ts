@@ -1,5 +1,5 @@
 export interface ShortUrlResponse {
-  id: string,
+  id: number,
   originalUrl: string,
   shortCode: string,
   createdByEmail: string,
